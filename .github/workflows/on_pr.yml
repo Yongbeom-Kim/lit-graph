@@ -29,6 +29,9 @@ jobs:
       - name: Install OpenTofu
         uses: ./.github/actions/install_opentofu
 
+      - name: Tofu init
+        run: tofu init | gh pr comment ${{ github.event.number }} --body -
+
       - name: Checkout Workspace
         run: |
           if [[ ${{ env.BRANCH_NAME}} == "main" ]]; then
@@ -37,9 +40,6 @@ jobs:
             tofu workspace select stage
           fi
         
-      # Runs a single command using the runners shell
-      - name: Tofu init
-        run: tofu init | gh pr comment ${{ github.event.number }} --body -
       - name: Tofu plan
         run: tofu plan | gh pr comment ${{ github.event.number }} --body -
 
