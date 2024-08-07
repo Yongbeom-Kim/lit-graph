@@ -52,12 +52,12 @@ resource "aws_iam_access_key" "terraform_backend" {
   user = aws_iam_user.terraform_backend.name
 }
 
-output "iam_user_name" {
-  value = aws_iam_user.terraform_backend.name
+output "iam_access_key_id" {
+  value = aws_iam_access_key.terraform_backend.id
   sensitive = true
 }
 
-output "iam_access_key" {
-  value = aws_iam_access_key.terraform_backend.id
+output "iam_access_key_secret" {
+  value = aws_iam_access_key.terraform_backend.secret
   sensitive = true
 }

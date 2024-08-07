@@ -1,9 +1,9 @@
 SHELL := /bin/bash
 
 # TERRAFORM_BACKEND_IAM_USER := $(shell ./scripts/decrypt_and_run.sh 'cd terraform_backend && tofu output -raw iam_user_name')
-TERRAFORM_BACKEND_IAM_USER := $(shell ./scripts/decrypt_and_run.sh 'cat terraform_backend/terraform.tfstate | jq -r .outputs.iam_user_name.value')
+TERRAFORM_BACKEND_IAM_ACCESS_ID := $(shell ./scripts/decrypt_and_run.sh 'cat terraform_backend/terraform.tfstate | jq -r .outputs.iam_access_key_id.value')
 # TERRAFORM_BACKEND_IAM_ACCESS_KEY := $(shell ./scripts/decrypt_and_run.sh 'cd terraform_backend && tofu output -raw iam_access_key')
-TERRAFORM_BACKEND_IAM_ACCESS_KEY := $(shell ./scripts/decrypt_and_run.sh 'cat terraform_backend/terraform.tfstate | jq -r .outputs.iam_access_key.value')
+TERRAFORM_BACKEND_IAM_SECRET_KEY := $(shell ./scripts/decrypt_and_run.sh 'cat terraform_backend/terraform.tfstate | jq -r .outputs.iam_access_key_secret.value')
 
 ## Terraform backend
 _tofu_backend:
@@ -23,8 +23,8 @@ tofu_backend_apply_auto:
 
 ## Terraform app
 _tofu_app:
-	@ export AWS_ACCESS_KEY_ID=$(TERRAFORM_BACKEND_IAM_ACCESS_KEY) && \
-		export AWS_SECRET_ACCESS_KEY=$(TERRAFORM_BACKEND_IAM_ACCESS_KEY) && \
+	export AWS_ACCESS_KEY_ID=$(TERRAFORM_BACKEND_IAM_ACCESS_ID) && \
+		export AWS_SECRET_ACCESS_KEY=$(TERRAFORM_BACKEND_IAM_SECRET_KEY) && \
 		./scripts/decrypt_and_run.sh 'tofu $(COMMAND)'
 
 tofu_app_init:
