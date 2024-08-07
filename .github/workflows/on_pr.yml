@@ -31,7 +31,7 @@ jobs:
         uses: ./.github/actions/install_opentofu
 
       - name: Tofu init
-        run: tofu init | gh pr comment ${{ github.event.number }} --body -
+        run: make tofu_app_init | gh pr comment ${{ github.event.number }} --body -
 
       - name: Checkout Workspace
         run: |
@@ -42,5 +42,5 @@ jobs:
           fi
         
       - name: Tofu plan
-        run: tofu plan | gh pr comment ${{ github.event.number }} --body -
+        run: make tofu_app_plan | gh pr comment ${{ github.event.number }} --body -
 

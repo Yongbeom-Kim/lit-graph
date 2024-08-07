@@ -25,6 +25,7 @@ provider "null" {
 
 provider "aws" {
   # Configuration options
+  
 }
 
 resource "aws_s3_bucket" "backend" {
