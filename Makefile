@@ -1,7 +1,9 @@
 SHELL := /bin/bash
 
-TERRAFORM_BACKEND_IAM_USER := $(shell ./scripts/decrypt_and_run.sh 'cd terraform_backend && tofu output -raw iam_user_name')
-TERRAFORM_BACKEND_IAM_ACCESS_KEY := $(shell ./scripts/decrypt_and_run.sh 'cd terraform_backend && tofu output -raw iam_access_key')
+# TERRAFORM_BACKEND_IAM_USER := $(shell ./scripts/decrypt_and_run.sh 'cd terraform_backend && tofu output -raw iam_user_name')
+TERRAFORM_BACKEND_IAM_USER := $(shell cat terraform_backend/terraform.tfstate | jq -r '.outputs.iam_user_name.value')
+# TERRAFORM_BACKEND_IAM_ACCESS_KEY := $(shell ./scripts/decrypt_and_run.sh 'cd terraform_backend && tofu output -raw iam_access_key')
+TERRAFORM_BACKEND_IAM_ACCESS_KEY := $(shell cat terraform_backend/terraform.tfstate | jq -r '.outputs.iam_access_key.value')
 
 ## Terraform backend
 _tofu_backend:
