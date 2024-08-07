@@ -2,28 +2,41 @@
 
 name: Test on Pull Request
 
-# Controls when the workflow will run
+permissions:
+  pull-requests: write
+
+env:
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+  GH_TOKEN: ${{ github.token }}
+
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   pull_request:
     branches: [ "main", "dev" ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Test script
-        run: echo Hello, world!
+      - name: Install Dependencies
+        uses: ./.github/actions/install_dependencies
+        with: 
+          AGE_SECRET_KEY: ${{ secrets.AGE_SECRET_KEY }}
+
+      - name: Tofu init
+        run: make tofu_init
+
+      - name: Checkout Workspace
+        run: |
+          if [[ ${{ env.BRANCH_NAME}} == "main" ]]; then
+            make tofu COMMAND='workspace select prod'
+          else
+            make tofu COMMAND='workspace select stage'
+          fi
+        
+      - name: Tofu plan
+        run: make tofu_plan
 
