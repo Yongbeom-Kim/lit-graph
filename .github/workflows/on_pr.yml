@@ -33,7 +33,7 @@ jobs:
           AGE_SECRET_KEY: ${{ secrets.AGE_SECRET_KEY }}
 
       - name: Tofu init
-        run: make tofu_app_init | gh pr comment ${{ github.event.number }} --body -
+        run: make tofu_app_init
 
       - name: Checkout Workspace
         run: |
