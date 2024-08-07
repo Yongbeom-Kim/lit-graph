@@ -17,7 +17,7 @@ for file in ${files[@]}; do
     # echo "Decrypting $file"
     # Sometimes the cleanup function runs twice on some files, so decrypt x2.
     # sops can't decrypt a file that's already decrypted.
-    sops -d -i $file 2>/dev/null
+    sops -d -i $file
     sops -d -i $file 2>/dev/null
 done
 
