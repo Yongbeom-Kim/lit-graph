@@ -33,16 +33,16 @@ jobs:
           AGE_SECRET_KEY: ${{ secrets.AGE_SECRET_KEY }}
 
       - name: Tofu init
-        run: make tofu_app_init
+        run: make tofu_init
 
       - name: Checkout Workspace
         run: |
           if [[ ${{ env.BRANCH_NAME}} == "main" ]]; then
-            tofu workspace select prod
+            make tofu COMMAND='workspace select prod'
           else
-            tofu workspace select stage
+            make tofu COMMAND='workspace select stage'
           fi
         
       - name: Tofu plan
-        run: make tofu_app_plan | gh pr comment ${{ github.event.number }} --body -
+        run: make tofu_plan | gh pr comment ${{ github.event.number }} --body -
 

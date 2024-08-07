@@ -22,19 +22,19 @@ tofu_backend_apply_auto:
 	$(MAKE) _tofu_backend COMMAND="apply -auto-approve"
 
 ## Terraform app
-_tofu_app:
+tofu:
 	@ export AWS_ACCESS_KEY_ID=$(TERRAFORM_BACKEND_IAM_ACCESS_ID) && \
 		export AWS_SECRET_ACCESS_KEY=$(TERRAFORM_BACKEND_IAM_SECRET_KEY) && \
 		./scripts/decrypt_and_run.sh 'tofu $(COMMAND)'
 
-tofu_app_init:
-	$(MAKE) _tofu_app COMMAND=init
+tofu_init:
+	$(MAKE) tofu COMMAND=init
 
-tofu_app_plan:
-	$(MAKE) _tofu_app COMMAND=plan
+tofu_plan:
+	$(MAKE) tofu COMMAND=plan
 
-tofu_app_apply:
-	$(MAKE) _tofu_app COMMAND=apply
+tofu_apply:
+	$(MAKE) tofu COMMAND=apply
 
-tofu_app_apply_auto:
-	$(MAKE) _tofu_app COMMAND="apply -auto-approve"
+tofu_apply_auto:
+	$(MAKE) tofu COMMAND="apply -auto-approve"
