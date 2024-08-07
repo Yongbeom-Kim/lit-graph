@@ -2,6 +2,10 @@
 
 name: Deploy on merge
 
+env:
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+  GH_TOKEN: ${{ github.token }}
+
 on:
   push:
     branches: [ "main", "dev" ]
