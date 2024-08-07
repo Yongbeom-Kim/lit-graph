@@ -41,3 +41,6 @@ tofu_apply:
 
 tofu_apply_auto:
 	$(MAKE) tofu COMMAND="apply -auto-approve"
+
+tofu_destroy:
+	$(MAKE) tofu COMMAND=destroy
