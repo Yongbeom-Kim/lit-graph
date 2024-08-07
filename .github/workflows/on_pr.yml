@@ -44,5 +44,5 @@ jobs:
           fi
         
       - name: Tofu plan
-        run: make tofu_plan | gh pr comment ${{ github.event.number }} --body -
+        run: make tofu_plan
 
