@@ -1,5 +1,12 @@
+# KEYS:
+# Yongbeom: age1a5c726yqajxf635dtvkt5pfydfg9mjf72dn458u53arjx3g5tphsxa3u3w
+# GH Actions: age14cusu0yypc0e65fu8wd4qyc7ks3as7enx7snstn6pg9m2g835uxqtdpxkv
 creation_rules:
   - path_regex: .*\.env$
-    age: 'age1a5c726yqajxf635dtvkt5pfydfg9mjf72dn458u53arjx3g5tphsxa3u3w'
+    age: 
+      age1a5c726yqajxf635dtvkt5pfydfg9mjf72dn458u53arjx3g5tphsxa3u3w,
+      age14cusu0yypc0e65fu8wd4qyc7ks3as7enx7snstn6pg9m2g835uxqtdpxkv
   - path_regex: terraform_backend/terraform.*
-    age: 'age1a5c726yqajxf635dtvkt5pfydfg9mjf72dn458u53arjx3g5tphsxa3u3w'
+    age: 
+      age1a5c726yqajxf635dtvkt5pfydfg9mjf72dn458u53arjx3g5tphsxa3u3w,
+      age14cusu0yypc0e65fu8wd4qyc7ks3as7enx7snstn6pg9m2g835uxqtdpxkv
