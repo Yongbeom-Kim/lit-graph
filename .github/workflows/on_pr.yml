@@ -2,15 +2,18 @@
 
 name: Test on Pull Request
 
-# Controls when the workflow will run
+permissions:
+  pull-requests: write
+
+env:
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+  
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   pull_request:
     branches: [ "main", "dev" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -26,7 +29,17 @@ jobs:
       - name: Install OpenTofu
         uses: ./.github/actions/install_opentofu
 
+      - name: Checkout Workspace
+        run: |
+          if [[ ${{ env.BRANCH_NAME}} == "main" ]]; then
+            tofu workspace select prod
+          else
+            tofu workspace select stage
+          fi
+        
       # Runs a single command using the runners shell
-      - name: Test script
-        run: echo Hello, world!
+      - name: Tofu init
+        run: tofu init | gh pr comment ${{ github.event.number }} --body -
+      - name: Tofu plan
+        run: tofu plan | gh pr comment ${{ github.event.number }} --body -
 
