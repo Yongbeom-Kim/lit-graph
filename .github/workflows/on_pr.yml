@@ -29,6 +29,8 @@ jobs:
 
       - name: Install Dependencies
         uses: ./.github/actions/install_dependencies
+        with: 
+          AGE_SECRET_KEY: ${{ secrets.AGE_SECRET_KEY }}
 
       - name: Tofu init
         run: make tofu_app_init | gh pr comment ${{ github.event.number }} --body -

@@ -27,6 +27,8 @@ jobs:
 
       - name: Install Dependencies
         uses: ./.github/actions/install_dependencies
+        with: 
+          AGE_SECRET_KEY: ${{ secrets.AGE_SECRET_KEY }}
 
       # Runs a single command using the runners shell
       - name: Test script
