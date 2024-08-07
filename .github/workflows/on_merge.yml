@@ -25,8 +25,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Install OpenTofu
-        uses: ./.github/actions/install_opentofu
+      - name: Install Dependencies
+        uses: ./.github/actions/install_dependencies
 
       # Runs a single command using the runners shell
       - name: Test script
