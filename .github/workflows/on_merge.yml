@@ -33,6 +33,6 @@ jobs:
             make tofu COMMAND='workspace select stage'
           fi
         
-      - name: Tofu plan
-        run: make tofu_apply
+      - name: Tofu apply
+        run: make tofu_apply_auto
 
