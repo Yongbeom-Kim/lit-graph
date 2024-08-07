@@ -23,7 +23,7 @@ tofu_backend_apply_auto:
 
 ## Terraform app
 _tofu_app:
-	export AWS_ACCESS_KEY_ID=$(TERRAFORM_BACKEND_IAM_ACCESS_ID) && \
+	@ export AWS_ACCESS_KEY_ID=$(TERRAFORM_BACKEND_IAM_ACCESS_ID) && \
 		export AWS_SECRET_ACCESS_KEY=$(TERRAFORM_BACKEND_IAM_SECRET_KEY) && \
 		./scripts/decrypt_and_run.sh 'tofu $(COMMAND)'
 
