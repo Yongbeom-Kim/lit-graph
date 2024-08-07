@@ -2,6 +2,10 @@ name: Install Dependencies
 
 description: Install Dependencies on the runner
 
+inputs:
+  AGE_SECRET_KEY:
+    description: 'The secret key for age encryption'
+    required: true
 runs:
   using: composite
   steps:
