@@ -23,6 +23,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: Install OpenTofu
+        uses: ./.github/workflows/install_opentofu.yml
+
       # Runs a single command using the runners shell
       - name: Test script
         run: echo Hello, world!
