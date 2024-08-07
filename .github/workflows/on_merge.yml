@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install OpenTofu
-        uses: ./.github/workflows/install_opentofu.yml
+        uses: ./.github/actions/install_opentofu
 
       # Runs a single command using the runners shell
       - name: Test script
